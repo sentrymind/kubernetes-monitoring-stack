@@ -6,7 +6,7 @@
 
 **Production-ready Kubernetes observability stack in 5 minutes**
 
-Complete monitoring solution with Prometheus, Grafana, and OpenTelemetry that actually works out of the box.
+Complete monitoring solution with Prometheus, Grafana, and OpenTelemetry that actually works out of the box. The repository now ships with production-ready Kind, Prometheus, and OpenTelemetry configuration so the setup script works without any manual tweaks.
 
 ---
 
@@ -61,7 +61,7 @@ brew install kind kubectl helm
 git clone https://github.com/sentry/kubernetes-monitoring-stack.git
 cd kubernetes-monitoring-stack
 
-# Run the setup script
+# Run the setup script (will validate all required files)
 chmod +x setup.sh
 ./setup.sh
 
@@ -103,6 +103,8 @@ up{job="kubernetes-nodes"}
 ```
 OTLP gRPC: localhost:4317
 OTLP HTTP: localhost:4318
+
+> ℹ️ The Kind cluster exposes NodePorts for Grafana (30000) and Prometheus (30900) and the Kind configuration automatically maps them to localhost ports 3000 and 9090 respectively. The OTLP ports are also mapped so you can push telemetry data without any additional port-forwarding.
 
 # Send test metrics:
 docker run --network=host otel/telemetrygen:latest metrics \
@@ -176,6 +178,16 @@ prometheus:
 ```
 
 ### Add Custom Dashboards
+
+All of the Helm value files live at the repository root:
+
+```text
+kind-config.yaml            # Kind cluster topology and port mappings
+prometheus-values.yaml      # kube-prometheus-stack overrides
+otel-collector-values.yaml  # OpenTelemetry Collector configuration
+```
+
+These files are validated by `setup.sh` before any Kubernetes resources are created. Feel free to fork the repo and adjust the defaults to match your infrastructure (e.g., different retention policies, Grafana datasources, or OTLP exporters).
 
 Edit `prometheus-values.yaml`:
 ```yaml

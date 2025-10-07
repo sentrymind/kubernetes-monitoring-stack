@@ -1,0 +1,73 @@
+# prometheus-values.yaml - Opinionated defaults for kube-prometheus-stack
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    scrapeInterval: 30s
+    evaluationInterval: 30s
+    walCompression: true
+    resources:
+      requests:
+        cpu: 200m
+        memory: 1Gi
+      limits:
+        cpu: 1
+        memory: 3Gi
+  ingress:
+    enabled: false
+  service:
+    type: NodePort
+    nodePort: 30900
+
+alertmanager:
+  alertmanagerSpec:
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
+kube-state-metrics:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+nodeExporter:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+grafana:
+  adminUser: admin
+  adminPassword: prom-operator
+  service:
+    type: NodePort
+    nodePort: 30000
+  dashboards:
+    default:
+      kubernetes-cluster-overview:
+        gnetId: 3119
+        revision: 1
+        datasource: Prometheus
+      kubernetes-capacity-planning:
+        gnetId: 12159
+        revision: 1
+        datasource: Prometheus
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+          isDefault: true
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.monitoring.svc.cluster.local:3100
+          editable: true
