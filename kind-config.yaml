@@ -1,0 +1,27 @@
+# kind-config.yaml - Kind cluster configuration for monitoring stack
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: monitoring-cluster
+nodes:
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+    extraPortMappings:
+      - containerPort: 30000
+        hostPort: 3000
+        protocol: TCP
+      - containerPort: 30900
+        hostPort: 9090
+        protocol: TCP
+      - containerPort: 4317
+        hostPort: 4317
+        protocol: TCP
+      - containerPort: 4318
+        hostPort: 4318
+        protocol: TCP
+  - role: worker
+  - role: worker
