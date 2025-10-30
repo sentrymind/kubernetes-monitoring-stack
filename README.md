@@ -234,6 +234,32 @@ Contributions are welcome! Here's how you can help:
 
 ---
 
+## 🤖 AI Agents
+
+This repository also includes specialized AI agents for various tasks:
+
+### Scientific History Agent
+
+An intelligent agent for searching and analyzing academic sources focused on 20th century history (1900-1999).
+
+**Features:**
+- Multi-source search (CrossRef, Semantic Scholar, CORE)
+- Automatic temporal filtering (1900-1999)
+- Contextual search with historical keywords
+- Export to JSON, Markdown, CSV formats
+
+**Quick Start:**
+
+```bash
+cd agents/scientific-history-agent
+pip install -r requirements.txt
+python scientific_history_agent.py "Первая мировая война" --output results.md
+```
+
+**Documentation:** See [agents/scientific-history-agent/README.md](agents/scientific-history-agent/README.md)
+
+---
+
 ## 📈 Roadmap
 
 - [ ] Support for Loki (log aggregation)
@@ -242,6 +268,7 @@ Contributions are welcome! Here's how you can help:
 - [ ] Cost analysis dashboard
 - [ ] Helm chart distribution
 - [ ] AWS/GCP/Azure guides
+- [x] Scientific History Agent for 20th century research
 
 ---
 
