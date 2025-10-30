@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific History Agent - Мобильная версия</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .search-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .search-btn:active {
+            transform: scale(0.95);
+        }
+
+        .search-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .result-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .result-abstract {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+
+        .badge-year {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-db {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-score {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .examples {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .examples h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .example-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            color: #333;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .example-btn:active {
+            background: #e0e0e0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Scientific History Agent</h1>
+            <p>Поиск научных источников по истории XX века</p>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="Введите запрос, например: Первая мировая война"
+            >
+            <button class="search-btn" id="searchBtn" onclick="performSearch()">
+                🔍 Найти источники
+            </button>
+        </div>
+
+        <div class="examples">
+            <h3>📚 Примеры запросов:</h3>
+            <button class="example-btn" onclick="setQuery('Первая мировая война')">Первая мировая война</button>
+            <button class="example-btn" onclick="setQuery('Революция 1917 года')">Революция 1917 года</button>
+            <button class="example-btn" onclick="setQuery('Холодная война')">Холодная война</button>
+            <button class="example-btn" onclick="setQuery('Великая депрессия')">Великая депрессия</button>
+            <button class="example-btn" onclick="setQuery('Космическая гонка')">Космическая гонка</button>
+        </div>
+
+        <div id="results" class="hidden"></div>
+    </div>
+
+    <script>
+        // Демо данные (офлайн режим)
+        const demoResults = [
+            {
+                title: "The Origins of the First World War",
+                authors: ["James Joll", "Gordon Martel"],
+                year: 1992,
+                source: "Cambridge University Press",
+                abstract: "Это классическое исследование рассматривает причины Первой мировой войны, анализируя сложную сеть союзов, милитаризма и национализма.",
+                url: "https://doi.org/10.1017/CBO9780511608568",
+                relevance_score: 0.95,
+                database: "CrossRef"
+            },
+            {
+                title: "Russia in Revolution: An Empire in Crisis, 1890 to 1928",
+                authors: ["S. A. Smith"],
+                year: 1917,
+                source: "Oxford University Press",
+                abstract: "Всестороннее исследование российской революции, охватывающее период от падения царизма до установления сталинского режима.",
+                url: "https://doi.org/10.1093/acprof:oso/9780199214426.001.0001",
+                relevance_score: 0.93,
+                database: "Semantic Scholar"
+            },
+            {
+                title: "The Cold War: A New History",
+                authors: ["John Lewis Gaddis"],
+                year: 1947,
+                source: "Penguin Press",
+                abstract: "Новый взгляд на Холодную войну, основанный на недавно рассекреченных архивных материалах из США, России и Китая.",
+                url: "https://www.penguinrandomhouse.com/books/301359/",
+                relevance_score: 0.89,
+                database: "Semantic Scholar"
+            },
+            {
+                title: "The Great Depression: An International Disaster",
+                authors: ["Thomas E. Hall", "J. David Ferguson"],
+                year: 1998,
+                source: "University of Michigan Press",
+                abstract: "Анализ экономических политик, которые привели к Великой депрессии 1929-1939 годов и их международных последствий.",
+                url: "https://doi.org/10.3998/mpub.15738",
+                relevance_score: 0.91,
+                database: "CrossRef"
+            },
+            {
+                title: "The Space Race: The Cold War Rivalry",
+                authors: ["Deborah Cadbury"],
+                year: 1957,
+                source: "Harper Collins",
+                abstract: "История космической гонки между США и СССР, включая первый спутник, первого человека в космосе и высадку на Луну.",
+                url: "https://www.harpercollins.com/",
+                relevance_score: 0.88,
+                database: "CrossRef"
+            }
+        ];
+
+        function setQuery(query) {
+            document.getElementById('searchInput').value = query;
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+
+            if (!query) {
+                alert('Пожалуйста, введите поисковый запрос');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('results');
+            const searchBtn = document.getElementById('searchBtn');
+
+            // Показываем загрузку
+            searchBtn.disabled = true;
+            searchBtn.textContent = '⏳ Поиск...';
+            resultsDiv.className = 'results';
+            resultsDiv.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Поиск в научных базах данных...</p>
+                </div>
+            `;
+
+            // Симулируем поиск (в демо режиме)
+            setTimeout(() => {
+                displayResults(filterResults(query));
+                searchBtn.disabled = false;
+                searchBtn.textContent = '🔍 Найти источники';
+            }, 1500);
+        }
+
+        function filterResults(query) {
+            // Простая фильтрация демо-данных
+            const lowerQuery = query.toLowerCase();
+
+            if (lowerQuery.includes('война') || lowerQuery.includes('war')) {
+                return demoResults.filter(r =>
+                    r.title.toLowerCase().includes('war') ||
+                    r.title.toLowerCase().includes('войн')
+                );
+            } else if (lowerQuery.includes('революц') || lowerQuery.includes('revolution')) {
+                return demoResults.filter(r =>
+                    r.title.toLowerCase().includes('revolution') ||
+                    r.title.toLowerCase().includes('russia')
+                );
+            } else if (lowerQuery.includes('депресс') || lowerQuery.includes('depression')) {
+                return demoResults.filter(r =>
+                    r.title.toLowerCase().includes('depression')
+                );
+            } else if (lowerQuery.includes('космос') || lowerQuery.includes('space')) {
+                return demoResults.filter(r =>
+                    r.title.toLowerCase().includes('space')
+                );
+            }
+
+            return demoResults;
+        }
+
+        function displayResults(results) {
+            const resultsDiv = document.getElementById('results');
+
+            if (results.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Результатов не найдено. Попробуйте другой запрос.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `<h3 style="margin-bottom: 15px; color: #333;">✅ Найдено ${results.length} источников</h3>`;
+
+            results.forEach((result, index) => {
+                html += `
+                    <div class="result-item">
+                        <div class="result-title">${index + 1}. ${result.title}</div>
+                        <div class="result-meta">
+                            👤 ${result.authors.join(', ')}
+                        </div>
+                        <div>
+                            <span class="badge badge-year">📅 ${result.year}</span>
+                            <span class="badge badge-db">🗄️ ${result.database}</span>
+                            <span class="badge badge-score">⭐ ${result.relevance_score.toFixed(2)}</span>
+                        </div>
+                        <div class="result-abstract">${result.abstract}</div>
+                        <div style="margin-top: 10px;">
+                            <a href="${result.url}" target="_blank" style="color: #667eea; text-decoration: none; font-size: 13px;">
+                                🔗 Открыть источник →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // Поиск по Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Показываем подсказку при первом открытии
+        window.addEventListener('load', function() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.className = 'results';
+            resultsDiv.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <p style="font-size: 18px; margin-bottom: 10px;">👋 Добро пожаловать!</p>
+                    <p style="font-size: 14px;">Введите запрос или выберите пример выше</p>
+                    <p style="font-size: 12px; margin-top: 15px; color: #999;">
+                        ℹ️ Это демо версия с примерами данных
+                    </p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
