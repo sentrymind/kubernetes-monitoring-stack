@@ -138,6 +138,9 @@ class ScientificHistoryAgent:
 
         try:
             url = "https://api.crossref.org/works"
+            headers = {
+                "User-Agent": "ScientificHistoryAgent/1.0 (mailto:research@example.com)"
+            }
             params = {
                 "query": query,
                 "filter": f"from-pub-date:{self.config['min_year']},until-pub-date:{self.config['max_year']}",
@@ -145,7 +148,7 @@ class ScientificHistoryAgent:
                 "select": "title,author,published,abstract,URL,subject"
             }
 
-            response = requests.get(url, params=params, timeout=10)
+            response = requests.get(url, params=params, headers=headers, timeout=10)
             response.raise_for_status()
             data = response.json()
 
@@ -190,7 +193,9 @@ class ScientificHistoryAgent:
 
         try:
             url = "https://api.semanticscholar.org/graph/v1/paper/search"
-            headers = {}
+            headers = {
+                "User-Agent": "ScientificHistoryAgent/1.0 (mailto:research@example.com)"
+            }
             if self.config["api_keys"].get("semantic_scholar"):
                 headers["x-api-key"] = self.config["api_keys"]["semantic_scholar"]
 
