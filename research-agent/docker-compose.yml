@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Redis for caching and task queue
+  redis:
+    image: redis:7-alpine
+    container_name: research-agent-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # FastAPI backend
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: research-agent-api
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PUBMED_EMAIL=${PUBMED_EMAIL:-research-agent@example.com}
+      - EMBEDDING_MODEL=all-MiniLM-L6-v2
+    volumes:
+      - ./data:/app/data
+      - ./visualizations:/app/visualizations
+      - ./logs:/app/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  redis_data:

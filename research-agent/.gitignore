@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Data and outputs
+data/*
+!data/.gitkeep
+visualizations/*.html
+visualizations/*.png
+visualizations/*.pdf
+logs/*.log
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models
+models/
+*.pt
+*.pth
+*.onnx
+
+# Temporary
+temp/
+tmp/
+*.tmp

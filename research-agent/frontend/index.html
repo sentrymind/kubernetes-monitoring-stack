@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Agent - AI-Powered Paper Search</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Research Agent</h1>
+            <p class="subtitle">AI-Powered Scientific Paper Search & Analysis</p>
+        </header>
+
+        <main>
+            <!-- Search Form -->
+            <section class="search-section">
+                <h2>Search Papers</h2>
+                <form id="searchForm">
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            id="query"
+                            name="query"
+                            placeholder="Enter search query (e.g., 'machine learning in healthcare')"
+                            required
+                            autocomplete="off"
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="sources" value="pubmed" checked> PubMed
+                            </label>
+                            <label>
+                                <input type="checkbox" name="sources" value="arxiv" checked> arXiv
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="semanticSearch" checked> Semantic Search
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startYear">Start Year:</label>
+                            <input type="number" id="startYear" min="1900" max="2099" placeholder="2020">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endYear">End Year:</label>
+                            <input type="number" id="endYear" min="1900" max="2099" placeholder="2024">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maxResults">Max Results:</label>
+                            <input type="number" id="maxResults" min="1" max="500" value="50">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+
+                <!-- Loading indicator -->
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Searching papers...</p>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" style="display: none;">
+                <!-- Statistics -->
+                <div class="stats-grid" id="stats">
+                </div>
+
+                <!-- Visualizations -->
+                <div class="viz-section">
+                    <h2>Visualizations</h2>
+                    <div class="viz-buttons">
+                        <button onclick="createVisualization('timeline')" class="btn btn-viz">
+                            📊 Timeline
+                        </button>
+                        <button onclick="createVisualization('wordcloud')" class="btn btn-viz">
+                            ☁️ Word Cloud
+                        </button>
+                        <button onclick="createVisualization('coauthors')" class="btn btn-viz">
+                            🔗 Co-Author Network
+                        </button>
+                        <button onclick="createVisualization('trends')" class="btn btn-viz">
+                            📈 Keyword Trends
+                        </button>
+                        <button onclick="analyzeResults()" class="btn btn-viz">
+                            🧮 Full Analysis
+                        </button>
+                    </div>
+                    <div id="visualization-container"></div>
+                </div>
+
+                <!-- Papers List -->
+                <div class="papers-section">
+                    <h2>Papers <span id="paper-count"></span></h2>
+                    <div id="papers-list" class="papers-list">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Section -->
+            <section id="analysis-section" style="display: none;">
+                <h2>Analysis Results</h2>
+                <div id="analysis-content"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Research Agent v1.0 - Powered by PubMed, arXiv & Semantic Search</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
