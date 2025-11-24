@@ -234,9 +234,9 @@ Contributions are welcome! Here's how you can help:
 
 ---
 
-## 🤖 AI Agents
+## 🤖 AI Agents & Bots
 
-This repository also includes specialized AI agents for various tasks:
+This repository also includes specialized AI agents and bots for various tasks:
 
 ### Scientific History Agent
 
@@ -247,6 +247,7 @@ An intelligent agent for searching and analyzing academic sources focused on 20t
 - Automatic temporal filtering (1900-1999)
 - Contextual search with historical keywords
 - Export to JSON, Markdown, CSV formats
+- Mobile web interface for smartphones
 
 **Quick Start:**
 
@@ -260,6 +261,31 @@ python scientific_history_agent.py "Первая мировая война" --ou
 
 ---
 
+### Coffee Shop Telegram Bot
+
+A full-featured Telegram bot for taking drink orders in a coffee shop.
+
+**Features:**
+- ☕ Menu with 4 categories (28+ drinks)
+- 🛒 Shopping cart with price calculation
+- 📏 Volume selection for each drink
+- ➕ Add-ons (syrups, cream, milk, etc.)
+- ✅ Order checkout with receipt
+- 📱 Adaptive interface with InlineKeyboard
+
+**Quick Start:**
+
+```bash
+cd agents/coffee-shop-bot
+pip install python-telegram-bot
+export TELEGRAM_BOT_TOKEN='your_bot_token_from_BotFather'
+python coffee_bot.py
+```
+
+**Documentation:** See [agents/coffee-shop-bot/README.md](agents/coffee-shop-bot/README.md)
+
+---
+
 ## 📈 Roadmap
 
 - [ ] Support for Loki (log aggregation)
@@ -269,6 +295,7 @@ python scientific_history_agent.py "Первая мировая война" --ou
 - [ ] Helm chart distribution
 - [ ] AWS/GCP/Azure guides
 - [x] Scientific History Agent for 20th century research
+- [x] Coffee Shop Telegram Bot for orders
 
 ---
 
