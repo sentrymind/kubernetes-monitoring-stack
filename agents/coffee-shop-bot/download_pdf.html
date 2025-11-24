@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скачать PDF - Coffee Shop Bot</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h1 {
+            color: #2C3E50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .emoji {
+            font-size: 64px;
+            margin: 20px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: transform 0.2s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        .info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: bold;
+            color: #666;
+        }
+        .value {
+            color: #333;
+        }
+        .qr-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        #qrcode {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .instructions {
+            text-align: left;
+            margin: 20px 0;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 8px 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="card">
+        <div class="emoji">☕</div>
+        <h1>Coffee Shop Bot</h1>
+        <p style="color: #666; font-size: 18px;">Документация PDF</p>
+
+        <div class="info">
+            <div class="info-item">
+                <span class="label">📄 Файл:</span>
+                <span class="value">Coffee_Shop_Bot_Documentation.pdf</span>
+            </div>
+            <div class="info-item">
+                <span class="label">📦 Размер:</span>
+                <span class="value">8.5 KB</span>
+            </div>
+            <div class="info-item">
+                <span class="label">📑 Страниц:</span>
+                <span class="value">8</span>
+            </div>
+            <div class="info-item">
+                <span class="label">📱 Формат:</span>
+                <span class="value">A4</span>
+            </div>
+        </div>
+
+        <a href="https://github.com/sentrymind/kubernetes-monitoring-stack/raw/claude/scientific-sources-agent-011CUd7vAk9s6juvMG5bBi3H/agents/coffee-shop-bot/Coffee_Shop_Bot_Documentation.pdf"
+           class="download-btn"
+           download>
+            📥 Скачать PDF
+        </a>
+
+        <div class="qr-section">
+            <h3 style="color: #333; margin-top: 0;">📱 Отсканируйте QR код</h3>
+            <p style="color: #666; font-size: 14px;">Наведите камеру телефона на код</p>
+            <div id="qrcode"></div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Инструкция для Android:</h3>
+            <ol>
+                <li>Нажмите кнопку "Скачать PDF" выше</li>
+                <li>Или отсканируйте QR код камерой телефона</li>
+                <li>PDF скачается в папку "Загрузки"</li>
+                <li>Откройте Telegram</li>
+                <li>Нажмите 📎 (скрепка)</li>
+                <li>Выберите "Файл" или "Документ"</li>
+                <li>Найдите PDF в "Загрузках"</li>
+                <li>Отправьте себе в "Избранное"</li>
+            </ol>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #fff3e0; border-radius: 10px;">
+            <h3 style="color: #e65100; margin-top: 0;">💡 Что внутри PDF:</h3>
+            <ul style="text-align: left; color: #666;">
+                <li>Полное меню кофейни с ценами</li>
+                <li>Инструкция по запуску бота</li>
+                <li>Установка на Android (Termux)</li>
+                <li>Примеры использования</li>
+                <li>Код и структура проекта</li>
+            </ul>
+        </div>
+
+        <p style="color: #999; font-size: 12px; margin-top: 30px;">
+            Создано с помощью Claude Code 🤖
+        </p>
+    </div>
+
+    <script>
+        // Генерация QR кода
+        const pdfUrl = "https://github.com/sentrymind/kubernetes-monitoring-stack/raw/claude/scientific-sources-agent-011CUd7vAk9s6juvMG5bBi3H/agents/coffee-shop-bot/Coffee_Shop_Bot_Documentation.pdf";
+
+        new QRCode(document.getElementById("qrcode"), {
+            text: pdfUrl,
+            width: 200,
+            height: 200,
+            colorDark: "#2C3E50",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+</html>
