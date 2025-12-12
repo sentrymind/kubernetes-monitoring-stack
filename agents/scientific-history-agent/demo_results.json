@@ -1,0 +1,124 @@
+[
+  {
+    "title": "The Origins of the First World War",
+    "authors": [
+      "James Joll",
+      "Gordon Martel"
+    ],
+    "year": 1992,
+    "source": "Cambridge University Press",
+    "abstract": "Это классическое исследование рассматривает причины Первой мировой войны, анализируя сложную сеть союзов, милитаризма и национализма, которые привели к конфликту 1914-1918 годов.",
+    "url": "https://doi.org/10.1017/CBO9780511608568",
+    "relevance_score": 0.95,
+    "database": "CrossRef"
+  },
+  {
+    "title": "Russia in Revolution: An Empire in Crisis, 1890 to 1928",
+    "authors": [
+      "S. A. Smith"
+    ],
+    "year": 1917,
+    "source": "Oxford University Press",
+    "abstract": "Всестороннее исследование российской революции, охватывающее период от падения царизма до установления сталинского режима.",
+    "url": "https://doi.org/10.1093/acprof:oso/9780199214426.001.0001",
+    "relevance_score": 0.93,
+    "database": "Semantic Scholar"
+  },
+  {
+    "title": "The Great Depression: An International Disaster of Perverse Economic Policies",
+    "authors": [
+      "Thomas E. Hall",
+      "J. David Ferguson"
+    ],
+    "year": 1998,
+    "source": "University of Michigan Press",
+    "abstract": "Анализ экономических политик, которые привели к Великой депрессии 1929-1939 годов и их международных последствий.",
+    "url": "https://doi.org/10.3998/mpub.15738",
+    "relevance_score": 0.91,
+    "database": "CrossRef"
+  },
+  {
+    "title": "The Cold War: A New History",
+    "authors": [
+      "John Lewis Gaddis"
+    ],
+    "year": 1947,
+    "source": "Penguin Press",
+    "abstract": "Новый взгляд на Холодную войну, основанный на недавно рассекреченных архивных материалах из США, России и Китая.",
+    "url": "https://www.penguinrandomhouse.com/books/301359/",
+    "relevance_score": 0.89,
+    "database": "Semantic Scholar"
+  },
+  {
+    "title": "Modernism: A Very Short Introduction",
+    "authors": [
+      "Christopher Butler"
+    ],
+    "year": 1920,
+    "source": "Oxford University Press",
+    "abstract": "Краткое введение в модернизм в искусстве, литературе и музыке XX века, рассматривающее ключевые движения и фигуры.",
+    "url": "https://doi.org/10.1093/actrade/9780192804419.001.0001",
+    "relevance_score": 0.87,
+    "database": "CrossRef"
+  },
+  {
+    "title": "A History of the World in the Twentieth Century",
+    "authors": [
+      "Martin Gilbert"
+    ],
+    "year": 1988,
+    "source": "William Morrow Paperbacks",
+    "abstract": "Всеобъемлющая история ключевых событий, войн, революций и социальных изменений в XX веке.",
+    "url": "https://www.harpercollins.com/",
+    "relevance_score": 0.85,
+    "database": "CrossRef"
+  },
+  {
+    "title": "The Age of Extremes: The Short Twentieth Century, 1914-1991",
+    "authors": [
+      "Eric Hobsbawm"
+    ],
+    "year": 1994,
+    "source": "Pantheon Books",
+    "abstract": "Исторический анализ 'короткого двадцатого века' от начала Первой мировой войны до распада Советского Союза.",
+    "url": "https://www.penguinrandomhouse.com/books/147870/",
+    "relevance_score": 0.92,
+    "database": "Semantic Scholar"
+  },
+  {
+    "title": "The Second World War",
+    "authors": [
+      "Antony Beevor"
+    ],
+    "year": 1939,
+    "source": "Little, Brown and Company",
+    "abstract": "Всесторонний рассказ о Второй мировой войне, охватывающий все театры военных действий с использованием архивных материалов.",
+    "url": "https://www.littlebrown.com/",
+    "relevance_score": 0.94,
+    "database": "CrossRef"
+  },
+  {
+    "title": "The Spanish Civil War",
+    "authors": [
+      "Hugh Thomas"
+    ],
+    "year": 1977,
+    "source": "Harper & Row",
+    "abstract": "Подробная история гражданской войны в Испании 1936-1939 годов, предшествовавшей Второй мировой войне.",
+    "url": "https://www.harpercollins.com/",
+    "relevance_score": 0.82,
+    "database": "Semantic Scholar"
+  },
+  {
+    "title": "Women's Suffrage and the First World War",
+    "authors": [
+      "Angela K. Smith"
+    ],
+    "year": 1918,
+    "source": "Palgrave Macmillan",
+    "abstract": "Исследование роли Первой мировой войны в движении за избирательные права женщин в Великобритании.",
+    "url": "https://doi.org/10.1057/9780230234567",
+    "relevance_score": 0.8,
+    "database": "CrossRef"
+  }
+]
