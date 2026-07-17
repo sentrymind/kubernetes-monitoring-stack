@@ -1,4 +1,4 @@
-# prometheus-values.yaml - Opinionated defaults for kube-prometheus-stack
+# prometheus-values.yaml - local Kind defaults for kube-prometheus-stack
 prometheus:
   prometheusSpec:
     retention: 7d
@@ -43,7 +43,7 @@ nodeExporter:
 
 grafana:
   adminUser: admin
-  adminPassword: prom-operator
+  # The chart generates the admin password and stores it in a Kubernetes Secret.
   service:
     type: NodePort
     nodePort: 30000
@@ -66,8 +66,3 @@ grafana:
           access: proxy
           url: http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
           isDefault: true
-        - name: Loki
-          type: loki
-          access: proxy
-          url: http://loki.monitoring.svc.cluster.local:3100
-          editable: true
